@@ -176,6 +176,7 @@ gulp.task('serve', ['default'], () => {
     notify: false,
     open: false,
     // Customize the Browsersync console logging prefix
+    https: true,
     logPrefix: 'WSK',
     server: ['.tmp', 'app'],
     port: 3000
@@ -191,7 +192,7 @@ gulp.task('serve:dist', ['default'], () =>
     // Run as an https by uncommenting 'https: true'
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
-    // https: true,
+    https: true,
     server: 'dist',
     port: 3001
   })
