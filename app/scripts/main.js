@@ -34,7 +34,7 @@
         var detectedQRCode = qrCodeManager.detectQRCode(context, function(url) {
           if(url !== undefined) {
             if(ga) { ga('send', 'event', 'urlfound'); }
-        
+
             qrCodeManager.showDialog(url);
           }
           processingFrame = false;
@@ -52,7 +52,7 @@
 
     this.setQrCode = function(qrcode) {
       qrcodeUrl = qrcode;
-    } 
+    }
 
     var init = function() {
       callbackUrl = getCallbackURL();
@@ -75,12 +75,12 @@
 
     var validateCallbackURL = function() {
       if(document.referrer === "") return false;
-    
+
       var referrer = new URL(document.referrer);
-      
-      return (callbackUrl !== undefined 
+
+      return (callbackUrl !== undefined
         && referrer.origin == callbackUrl.origin
-        && referrer.scheme !== 'https');
+        && referrer.scheme !== 'https' && callbackUrl !== null);
     };
 
     var getCallbackURL = function() {
@@ -106,7 +106,7 @@
     var qrcodeIgnore = root.querySelector(".QRCodeSuccessDialog-ignore");
     var qrcodeShare = root.querySelector(".QRCodeSuccessDialog-share");
     var qrcodeCallback = root.querySelector(".QRCodeSuccessDialog-callback");
- 
+
     var client = new QRClient();
     var callbackController = new QRCodeCallbackController(qrcodeCallback);
 
@@ -184,7 +184,7 @@
       var heightRatio = cameraVideo.videoHeight / height;
       var widthRatio = cameraVideo.videoWidth / width;
 
-      var scaleFactor = 1; 
+      var scaleFactor = 1;
 
       // if the video is physcially smaller than the screen
       if(height > cameraVideo.videoHeight && width > cameraVideo.videoWidth) {
@@ -196,7 +196,7 @@
 
       cameraVideo.style.transform = 'translate(-50%, -50%) scale(' + scaleFactor + ')';
     });
-   
+
     var source = new CameraSource(cameraVideo);
 
     this.getDimensions = function() {
@@ -315,8 +315,8 @@
       if('enumerateDevices' in navigator.mediaDevices) {
          navigator.mediaDevices.enumerateDevices()
           .then(function(sources) {
-            return sources.filter(function(source) { 
-              return source.kind == 'videoinput' 
+            return sources.filter(function(source) {
+              return source.kind == 'videoinput'
             });
           })
           .then(function(sources) {
@@ -482,8 +482,8 @@
         minLength: minLength,
         width: minLength - 64,
         height: minLength - 64,
-        paddingHeight: paddingHeight, 
-        paddingWidth: paddingWidth 
+        paddingHeight: paddingHeight,
+        paddingWidth: paddingWidth
       };
     }
 
@@ -529,7 +529,7 @@
       // The mapping value from window to source scale
       scaleX = (sourceWidth / wWidth );
       scaleY = (sourceHeight / wHeight);
-      
+
       // if the video is physcially smaller than the screen
       if(wHeight > sourceHeight && wWidth > sourceWidth) {
         scaleFactor = 1 / Math.max(scaleY, scaleX);
@@ -540,7 +540,7 @@
 
       // The canvas should be the same size as the video mapping 1:1
       dHeight = dWidth = overlaySize.width / scaleFactor ;
-      
+
       // The width of the canvas should be the size of the overlay in video size.
       cameraCanvas.width =  dWidth;
       cameraCanvas.height = dWidth;
